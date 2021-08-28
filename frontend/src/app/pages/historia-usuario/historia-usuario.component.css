@@ -1,0 +1,9 @@
+.historia-form  {
+    width: 90%;
+    margin: auto;
+    display: block;
+}
+
+.historia-form  mat-form-field {
+    display: block;
+}

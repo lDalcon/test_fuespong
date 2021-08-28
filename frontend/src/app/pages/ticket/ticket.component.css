@@ -1,0 +1,9 @@
+.ticket-form {
+    width: 80%;
+    margin: auto;
+    display: block;
+}
+
+.ticket-form mat-form-field {
+    display: block;
+}

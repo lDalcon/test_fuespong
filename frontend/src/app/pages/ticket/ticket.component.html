@@ -1,0 +1,45 @@
+<mat-card class="ticket-form" *ngIf="!editar">
+    <mat-card-title>Registrar Ticket</mat-card-title>
+    <mat-card-content>
+    </mat-card-content>
+    <form [formGroup]="ticketForm" autocomplete="off">
+        <mat-form-field>
+            <input matInput type="text" formControlName="ticnombre" placeholder="Nombre">
+        </mat-form-field>
+        <mat-form-field>
+            <textarea matInput formControlName="ticcomentarios" placeholder="Comentarios"></textarea>
+        </mat-form-field>
+    </form>
+    <mat-card-actions>
+        <button mat-raised-button color="primary" [disabled]="!ticketForm.valid"
+            (click)="crearTicket()">Crear</button>
+    </mat-card-actions>
+</mat-card>
+
+<mat-card class="ticket-form" *ngIf="editar">
+    <mat-card-title>Editar Ticket</mat-card-title>
+    <mat-card-content>
+    </mat-card-content>
+    <form [formGroup]="actTicketForm" autocomplete="off">
+        <mat-form-field>
+            <input matInput type="text" formControlName="ticnombre" placeholder="Nombre">
+        </mat-form-field>
+        <mat-form-field>
+            <textarea matInput formControlName="ticcomentarios" placeholder="Comentarios"></textarea>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select formControlName="ticestado">
+                <mat-option [value]="1">Activo</mat-option>
+                <mat-option [value]="2">En Proceso</mat-option>
+                <mat-option [value]="3">Finalizado</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+    </form>
+    <mat-card-actions>
+        <button mat-raised-button color="primary" [disabled]="!actTicketForm.valid"
+            (click)="editarTicket()">Editar</button>
+    </mat-card-actions>
+</mat-card>
+
+

@@ -1,0 +1,77 @@
+<mat-card>
+    <mat-tab-group>
+        <mat-tab *ngFor="let proyecto of proyectos" label="{{proyecto.pronombre}}">
+
+
+            <button mat-button (click)="crearHistoria(proyecto)">
+                <mat-icon>post_add</mat-icon>
+            </button>
+
+
+            <mat-accordion *ngFor="let historia of proyecto.prohistorias">
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            {{'#' + historia.hurid }}: {{historia.hurnombre}}
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <button mat-button (click)="crearTicket(historia)">
+                        <mat-icon>local_activity</mat-icon>
+                    </button>
+
+                    <table mat-table [dataSource]="historia.hurtickets || []" class="mat-elevation-z8">
+
+                        <ng-container matColumnDef="ticid">
+                            <th mat-header-cell *matHeaderCellDef> No. </th>
+                            <td mat-cell *matCellDef="let element"> {{element.ticid}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="ticnombre">
+                            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                            <td mat-cell *matCellDef="let element"> {{element.ticnombre}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="ticcomentarios">
+                            <th mat-header-cell *matHeaderCellDef> Comentarios </th>
+                            <td mat-cell *matCellDef="let element"> {{element.ticcomentarios}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="ticfechacrea">
+                            <th mat-header-cell *matHeaderCellDef> Fecha </th>
+                            <td mat-cell *matCellDef="let element"> {{element.ticfechacrea | date}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="ticestado">
+                            <th mat-header-cell *matHeaderCellDef> Estado </th>
+                            <td mat-cell *matCellDef="let element">
+                                <mat-chip-list>
+                                    <mat-chip *ngIf="element.ticestado == 1" selected>Activo</mat-chip>
+                                    <mat-chip *ngIf="element.ticestado == 2" color="accent" selected>En Proceso</mat-chip>
+                                    <mat-chip *ngIf="element.ticestado == 3" color="primary" selected>Finalizado</mat-chip>
+                                    <mat-chip *ngIf="element.ticestado == 4" color="warn" selected>Cancelado</mat-chip>
+                                </mat-chip-list>
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="accion" style="text-align: center;">
+                            <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                            <td mat-cell *matCellDef="let element">
+                                <button mat-button matTooltip="Editar" (click)="editarTicket(element)"
+                                *ngIf="element.ticestado == 1  || element.ticestado == 2 ">
+                                    <mat-icon>mode_edit</mat-icon>
+                                </button>
+                                <button mat-button matTooltip="Cancelar" color="warn" (click)="cancelarTicket(element)"
+                                *ngIf="element.ticestado == 1">
+                                    <mat-icon>delete_forever</mat-icon>
+                                </button>
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </mat-tab>
+    </mat-tab-group>
+</mat-card>

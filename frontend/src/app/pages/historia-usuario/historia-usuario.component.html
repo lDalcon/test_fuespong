@@ -1,0 +1,38 @@
+<mat-card class="historia-form">
+    <mat-card-title>Registrar Historia de Usuario</mat-card-title>
+    <mat-card-content>
+    </mat-card-content>
+    <form [formGroup]="historiaForm" autocomplete="on">
+        <mat-form-field>
+            <input matInput type="text" formControlName="hurnombre" placeholder="Nombre">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="text" formControlName="hurrole" placeholder="Role">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="text" formControlName="hurfuncionalidad" placeholder="Funcionalidad">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="text" formControlName="hurbeneficio" placeholder="Beneficio">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="text" formControlName="hurcriaceptacion" placeholder="Criterio de aceptación">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="text" formControlName="hurcomentarios" placeholder="Comentarios">
+        </mat-form-field>
+        <mat-card>
+            <p>Información Ticket</p>
+            <mat-form-field>
+                <input matInput type="text" formControlName="ticnombre" placeholder="Nombre">
+            </mat-form-field>
+            <mat-form-field>
+                <textarea matInput formControlName="ticcomentarios" placeholder="Comentarios"></textarea>
+            </mat-form-field>
+        </mat-card>
+    </form>
+    <mat-card-actions>
+        <button mat-raised-button color="primary" [disabled]="!historiaForm.valid"
+            (click)="crearHistoria()">Crear</button>
+    </mat-card-actions>
+</mat-card>
